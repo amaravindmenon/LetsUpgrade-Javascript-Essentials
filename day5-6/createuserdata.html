@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>User Information</title>
+    <style>
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>All Data And User Infromation</h1>
+      <div class="sreachform mt-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Source">Search Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="searchname"
+                onkeyUp="searchbyname()"
+                placeholder="Search Name"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Destination">Search City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="searchcity"
+                onkeyUp="searchbycity()"
+                placeholder="Search City"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <table id="usertab" class="table table-striped mt-2">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">City</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+  <script>
+    let userobj = [
+      { sno: "1", name: "Tarun", age: "22", city: "delhi", salery: "10000" },
+      {
+        sno: "2",
+        name: "Aravind",
+        age: "20",
+        city: "janakpuri",
+        salery: "1000",
+      },
+      { sno: "3", name: "Harsh", age: "21", city: "rohini", salery: "2000" },
+      {
+        sno: "4",
+        name: "Pradeep",
+        age: "23",
+        city: "manglorpuri",
+        salery: "2000",
+      },
+      { sno: "5", name: "pankaj", age: "25", city: "haryana", salery: "2000" },
+      { sno: "6", name: "sagun", age: "25", city: "nangloi", salery: "2000" },
+    ];
+
+    init();
+
+    function init() {
+      userobj.forEach((element) => {
+        preparetable(
+          element.sno,
+          element.name,
+          element.age,
+          element.city,
+          element.salery
+        );
+      });
+    }
+
+    function deleterow(id) {
+      delete userobj[id];
+      ele = document.getElementsByClassName(`row${id}`)[0];
+      ele.classList.add("hide");
+    }
+
+    function preparetable(sno, name, age, city, salery) {
+      let table = document.getElementById("usertab");
+      let row = table.insertRow();
+      row.classList.add(`row${sno - 1}`);
+      var cell0 = row.insertCell(0);
+      var cell1 = row.insertCell(1);
+      var cell2 = row.insertCell(2);
+      var cell3 = row.insertCell(3);
+      var cell4 = row.insertCell(4);
+      var cell5 = row.insertCell(5);
+
+      cell0.innerHTML = sno;
+      cell1.innerHTML = name;
+      cell2.innerHTML = age;
+      cell3.innerHTML = city;
+      cell4.innerHTML = salery;
+      cell5.innerHTML = `<button type="button" onclick="deleterow(${
+        sno - 1
+      })" id="search" class="btn btn-block btn-danger">Delete</button>`;
+    }
+
+    const searchbyname = () => {
+      let name = document.getElementById("searchname").value.toLowerCase();
+      let mytable = document.getElementById("usertab");
+      let tr = mytable.getElementsByTagName("tr");
+
+      for (let i = 1; i < tr.length; i++) {
+        nametd = tr[i].getElementsByTagName("td")[1];
+        if (nametd) {
+          nameval = nametd.textContent || nametd.innerHTML;
+          if (nameval.toLowerCase().indexOf(name) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    };
+
+    const searchbycity = () => {
+      let city = document.getElementById("searchcity").value.toLowerCase();
+      let mytable = document.getElementById("usertab");
+      let tr = mytable.getElementsByTagName("tr");
+
+      for (let i = 1; i < tr.length; i++) {
+        citytd = tr[i].getElementsByTagName("td")[3];
+        if (citytd) {
+          cityval = citytd.textContent || citytd.innerHTML;
+          if (cityval.toLowerCase().indexOf(city) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    };
+  </script>
+</html>

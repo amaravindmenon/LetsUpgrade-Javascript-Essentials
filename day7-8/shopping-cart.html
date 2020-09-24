@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Shopping portal!</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- start Modal -->
+    <div class="modal fade" id="exampleModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Name">Enter Product Name</label>
+                        <input type="text" id="pname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="kjh">Enter Product Color</label>
+                        <input type="text" id="pcolor" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ekjh">Enter Product Price</label>
+                        <input type="number" id="pprice" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="kjh">Enter Product Image</label>
+                        <input type="text" id="pimg" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="kjh">Enter Product Description</label>
+                        <textarea name="" class="form-control" id="pdesc" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <button type="button" id="additem" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add product modal -->
+
+    <!-- nav start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Shopping Cart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModal">Add Item <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.htm">View Cart</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav mr-5">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" button onclick="window.location.href='cart.htm'">Item In Cart <span
+                        id="productcount"></span></button>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- nav end -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 mt-5">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Apply filter
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Enter Min Price</label>
+                                    <input type="number" id="minprice" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Enter Max Price</label>
+                                    <input type="number" id="maxprice" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" id="applyfilter" class="btn mt-4 btn-block btn-primary">Apply Filter</button>
+                                    <button type="button" id="resetfilter" class="btn mt-4 hide btn-block btn-danger">Reset filter</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- product display start -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-11 col-md-10 mx-auto">
+                <div class="row mt-5 gx-3">
+                    <div class="col-md-12 col-lg-8 col-11 mx-auto main-cart mb-lg-0 mb-5 shadow">
+                        <h2 class="py-4 font-width-bold">All product display</h2>
+                        <div id="procontainer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- product display end -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="shopping.js"></script>
+
+</body>
+
+</html>
